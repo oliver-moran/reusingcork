@@ -1,0 +1,28 @@
+{
+  "name": "resuingcork",
+  "version": "0.1.0",
+  "description": "A website that allows people to list underused and vacant sites in Cork",
+  "main": "server.js",
+  "scripts": {
+	"start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Cork",
+    "housing",
+    "homelessness",
+    "NAMA"
+  ],
+  "author": "Oliver Moran <oliver.moran@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "cookie-parser": "^1.4.3",
+    "data-uri-to-buffer": "0.0.4",
+    "express": "^4.14.0",
+    "jimp": "^0.2.27",
+    "multer": "^1.2.1",
+    "nedb": "^1.8.0",
+    "uuid": "^3.0.1"
+  }
+}

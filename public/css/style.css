@@ -1,0 +1,251 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
+
+body {
+    background: #00AFC9;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+.anchor {
+    position: relative;
+    top: -100px;
+}
+
+@media screen and (max-width: 767px) {
+    .anchor {
+        top: -50px;
+    }
+    
+    #welcome {
+        padding-top: 65px;
+    }
+}
+
+.bg-image {
+    background-image: url(../img/background-home.png);
+    background-size: cover;
+}
+
+.navbar-default {
+    box-shadow: none;
+    background: #00AFC9;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-radius: 0px;
+}
+
+.navbar-default .navbar-nav {
+    padding-top: 50px;
+}
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover {
+    background: transparent;
+    color: #fff;
+    font-weight: 400;
+    box-shadow: none;
+}
+
+.navbar-default .navbar-nav > li > a {
+    color: #333;
+    text-transform: uppercase;
+    font-size: 19px;
+}
+
+.navbar-default .navbar-nav > li > a:hover {
+    color: #fff;
+}
+
+@media screen and (min-width: 768px) and (max-width: 991px) {
+    #main-navbar .navbar-right {
+        padding-top: 56px;
+    }
+    
+    .navbar-default .navbar-nav > li > a {
+        font-size: 17px;
+        padding: 10px;
+    }
+    
+    .nav > li > a > img {
+        transform: scale(0.75);
+    }
+}
+
+.welcome-box {
+    background-color: #022A3C;
+    padding: 50px 25px;
+}
+
+.welcome-box h1 {
+    color: #fff;
+    font-size: 40px;
+    margin: 0 0 10px;
+}
+
+.welcome-box p {
+    color: #F4E851;
+    margin-top: 40px;
+    font-size: 27px;
+    font-weight: 600;
+}
+
+.how-it-works-box {
+    margin: 15px 0;
+    background-color: #fff;
+    padding: 50px 25px;
+}
+
+.how-it-works-box h2 {
+    color: #000;
+    font-size: 40px;
+    margin: 0 0 10px;
+}
+
+.how-it-works-box p {
+    font-size: 28px;
+}
+
+p.yellow {
+    background-color: #F4E851;
+    padding: 5px 15px;
+}
+
+p.green {
+    background-color: #CADD70;
+    padding: 5px 15px;
+}
+
+p.blue {
+    background-color: #9DD7E3;
+    padding: 5px 15px;
+}
+
+.navbar-default .navbar-toggle {
+    border: none;
+    padding-right: 0px;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: white;
+}
+
+.navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover {
+    background-color: transparent;
+}
+
+@media screen and (max-width: 767px) {
+    .navbar-default {
+        margin-bottom: 0px;
+    }
+    .navbar-brand img {
+        width: auto;
+        height: 25px;
+    }
+    
+    .navbar-default .navbar-nav {
+        padding-top: 0px;
+    }
+    
+    .navbar-nav .visible-xs {
+        display: inline-block !important;
+        text-transform: none;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .navbar-default {
+        height: 100px;
+    }
+    
+    .welcome-box {
+        margin: 180px 0;
+    }
+    
+    .how-it-works-box {
+        margin-bottom: 90px;
+    }
+}
+
+#leaflet-map {
+    height: 640px;
+}
+
+@media screen and (max-width: 767px) {
+    #leaflet-map {
+        height: 480px;
+    }
+}
+
+#about-area {
+    background: #F4E851;
+    padding-bottom: 15px;
+}
+
+#about-area h2 {
+    font-size: 40px;
+}
+
+#about-area p {
+    font-size: 20px;
+}
+
+@media screen and (min-width: 768px) {
+    #twitter-feed {
+        margin-top: 60px;
+    }
+}
+
+footer {
+    background: white;
+    padding-top: 45px;
+    padding-bottom: 45px;
+}
+
+footer p {
+    text-align: center;
+}
+
+footer img {
+    margin-right: 1em;
+}
+
+textarea {
+    height: 200px;
+}
+
+.marker-image {
+    width: 300px;
+    height: 225px;
+    background-size: cover;
+    background-color: #ddd;
+    border: 1px solid #ddd;
+}
+
+[data-image=""] {
+    display: none;
+}
+
+.modal-header .glyphicon-map-marker {
+    margin-left: 0.5em;
+    margin-right: 0.3em;
+}
+
+.modal-footer .glyphicon-refresh {
+    margin-right: 0.5em;
+}
+
+.spinning {
+    animation: rotation 2s infinite linear;
+}
+
+@-webkit-keyframes rotation {
+    from {transform: rotate(0deg);}
+    to {transform: rotate(360deg);}
+}
+
+.avoid-clicks {
+  pointer-events: none;
+}
+
+.grayscale {
+    filter: grayscale(100%) brightness(50%);
+}

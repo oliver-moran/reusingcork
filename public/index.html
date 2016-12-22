@@ -1,0 +1,197 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <title>Reusing Cork - Share information about vacant or underused spaces in Cork</title>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+        <!-- Place favicon.ico in the root directory -->
+
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/vendor/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/vendor/bootstrap/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="css/style.css">
+        <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+        <script src='https://www.google.com/recaptcha/api.js'></script>
+    </head>
+    <body data-spy="scroll" data-target="#main-navbar" data-offset="100">
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <nav id="main-navbar" class="navbar navbar-default navbar-fixed-top">
+          <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="#"><img src="img/logo-200x70.png"></a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <ul class="nav navbar-nav navbar-right">
+                <li class="active"><a href="#welcome">Home</a></li>
+                <li><a href="#how-it-works">How it works</a></li>
+                <li><a href="#try-it-out">Try it out</a></li>
+                <li><a href="#about">About</a></li>
+<!--                <li><a href="#"><img src="img/icon_instagram.png"></a></li>-->
+                <li><a href="mailto:info@reusingcork.ie"><img src="img/icon_email.png"> <span class="visible-xs">info@reusingcork.ie</span></a></li>
+                <li><a href="https://www.facebook.com/reusingcork"><img src="img/icon_facebook.png"> <span class="visible-xs">facebook.com/reusingcork</span></a></li>
+                <li><a href="https://www.twitter.com/reusingcork"><img src="img/icon_twitter.png"> <span class="visible-xs">twitter.com/reusingcork</span></a></li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+        
+        <div id="welcome" class="bg-image">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-5 col-md-6 col-sm-8 welcome-box">
+                        <h1>Welcome to Reusing Cork, a space to discover and share information about vacant or underused spaces in Cork</h1>
+                        <p>Join us in unlocking the potential of the spaces in our city</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="how-it-works" class="anchor"><!-- anchor point --></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-5 col-md-6 col-sm-8 how-it-works-box">
+                        <h2>How it works</h2>
+                        <p>Using the map below, discover or add information about any underused sites you have noticed. </p>
+                        
+                        <p class="yellow"><strong>Add a space</strong> by clicking or tapping on a location on the map.</p>
+                        <p class="green"><strong>Share your information</strong> about a site.</p>
+                        <p class="blue"><strong>Connect with others</strong> who might be interested in the site.</p>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+        <div id="try-it-out" class="anchor"><!-- anchor point --></div>
+        <div id="leaflet-map"></div>
+        
+        <div id="about" class="anchor"><!-- anchor point --></div>
+        <div id="about-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h2>About the Project</h2>
+
+                        <p>Reusing Cork responds to the observation that we don’t use space in our city efficiently - and sometimes we don’t use it at all.</p>
+                        <p>Reusing Cork attempts to map underused spaces in order to identify opportunities for using the city more efficiently for the benefit of everyone.</p>
+                        <p>Underused spaces include sites and buildings that are not used at all (vacant) or that are only partly in use. It also includes spaces that may have a use, like a roof or a grassed area, but that could accommodate additional uses.</p>
+                        <p>Reusing Cork is based on Reusing Dublin, an experimental research project that is part of a wider EU FP7 project called TURAS (Transitioning towards Urban Resilience and Sustainability).</p>
+                    </div>
+                    <div id="twitter-feed" class="col-sm-6">
+                        <a class="twitter-timeline" data-height="400" href="https://twitter.com/reusingcork">Tweets by TwitterDev</a>
+                        <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <div class="container">
+                <p>
+                    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
+                    Reusing is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+                </p>
+                
+                <hr>
+                
+                <p class="small">By saving changes, you irrevocably agree to release your contribution under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. Your IP address is recorded with changes you save. Reusing Cork uses Google Analytics to analyse website usage.
+                </p>
+            </div>
+        </footer>
+        
+        
+        <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.12.0.min.js"><\/script>')</script>
+        <script src="css/vendor/bootstrap/js/bootstrap.min.js"></script>
+        
+        <link rel="stylesheet" href="js/vendor/leaflet/leaflet.css" />
+        <script src="js/vendor/leaflet/leaflet.js"></script>
+        
+        <link rel="stylesheet" href="js/vendor/leaflet-control-pan/L.Control.Pan.css">
+        <script src="js/vendor/leaflet-control-pan/L.Control.Pan.js"></script>
+        
+        <script src="js/vendor/tinymce/js/tinymce/tinymce.min.js"></script>
+        
+        <script src="js/plugins.js"></script>
+        
+        <div id="edit-modal" class="modal fade" tabindex="-1" role="dialog">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"><span id="modal-title"></span> <small><i class="glyphicon glyphicon-map-marker"><!-- map pin --></i></small><small id="modal-lat-lng"></small></h4>
+              </div>
+              <div class="modal-body">
+
+                  <form id="modal-form">
+                      <div id="file-input-group" class="form-group">
+                        <label for="file-input">Photograph:</label>
+                        <div class="marker-image"><!-- image goes here --></div>
+                        <input type="file" id="file-input" accept="image/*" required>
+                      </div>
+                      <div class="form-group">
+                        <label for="desc-input">Description:</label>
+                        <input type="text" class="form-control" id="desc-input" placeholder="A short description of the property" value="" maxlength="1024">
+                      </div>
+                      <div class="form-group">
+                          <label for="notes-input">Notes (optional):</label>
+                          <textarea class="form-control" id="notes-input" placeholder=""></textarea>
+                          <p class="help-block">Share any observations or ideas you have about the property.</p>
+                      </div>
+                        <div class="g-recaptcha" data-sitekey="6LeQSw8UAAAAAGmK3MqnKCVj-CMU1qCNCYXnEy2I"></div>
+                    </form>
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger pull-left">Delete <span class="hidden-xs">location</span></button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary"><i class="glyphicon glyphicon-refresh spinning hidden"><!-- spinner --></i> Save changes</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        
+        <div id="delete-confirm-modal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+          <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <p>Are you sure you want to delete this location?</p>
+                    <div class="row">
+                        <div class="col-xs-6"><button class="btn btn-default btn-block" data-dismiss="modal">Cancel</button></div>
+                        <div class="col-xs-6"><button class="btn btn-danger btn-block">Delete</button></div>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+        
+        <script src="js/main.js"></script>
+        
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-89280126-1', 'auto');
+          ga('send', 'pageview');
+        </script>
+    </body>
+</html>
