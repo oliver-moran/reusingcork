@@ -249,3 +249,9 @@ textarea {
 .grayscale {
     filter: grayscale(100%) brightness(50%);
 }
+
+@media screen and (max-width: 767px) {
+    .block-xs {
+        display: block;
+    }
+}
