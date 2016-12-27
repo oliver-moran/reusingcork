@@ -8,7 +8,7 @@ var FS = require("fs");
 var Path = path = require("path");
 var DataUriToBuffer = require("data-uri-to-buffer");
 var Zip = require("express-zip");
-var Glob = require("glob")
+var Glob = require("glob");
 
 var data_dir = process.env.OPENSHIFT_DATA_DIR || Path.join(__dirname, "./");
 var static_dir = Path.join(data_dir, "static");
@@ -77,6 +77,33 @@ app.get("/api/export", function(req, res) {
                 res.zip(files, "reusingcork-" + Date.now() + ".zip");
             }
         });
+    });
+});
+
+app.get("/api/locations/deleted", function(req, res) {
+    var from = req.params.from || 0;
+    var to = req.params.to || Date.now();
+    db.revisions.find({ $and: [
+        {timestamp: { $gte: from }},
+        {timestamp: { $lte: to }}]
+    }).sort({ timestamp: -1 }).exec(function (err, docs) {
+        if (err) res.status(500);
+        else {
+            var revisions = {};
+            docs.forEach(function(doc) {
+                delete doc._id;
+                if ("undefined" == typeof revisions[doc.uuid]) revisions[doc.uuid] = [];
+                revisions[doc.uuid].push(doc);
+            });
+            var deletions = [];
+            console.log(revisions);
+            for (var id in revisions) {
+                if ("undefined" == typeof revisions[id][0].lat) {
+                    deletions.push(revisions[id][1]);
+                }
+            }
+            res.json(deletions);
+        }
     });
 });
 

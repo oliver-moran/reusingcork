@@ -1,9 +1,21 @@
+var red = new L.Icon({
+  iconUrl: "/js/vendor/leaflet-color-markers/img/marker-icon-red.png",
+  shadowUrl: "/js/vendor/leaflet/images/marker-shadow.png",
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41]
+});
+
+var showDeleted = (getParameterByName("deleted") == "true");
+
 $(".navbar-default a").on("click", function () {
    $(".navbar-collapse").collapse("hide");
 });
 
 var locations = [];
 var map;
+var CORK_LAT_LNG = [51.8970, -8.475];
 
 $(document).ready(function(){
     $.ajax({
@@ -44,7 +56,7 @@ function resetRecaptcha() {
 }
 
 function startMap() {
-    map = L.map("leaflet-map").setView([51.8970, -8.475], 15);
+    map = L.map("leaflet-map").setView(CORK_LAT_LNG, 15);
     map.scrollWheelZoom.disable();
     map.locate({setView: true});
     map.on('locationfound', function onLocationFound(e) {
@@ -65,6 +77,21 @@ function startMap() {
         var marker = L.marker([locations[i].lat, locations[i].lng]).addTo(map);
         locations[i].marker = marker;
         bindMarkerHTML(locations[i]);
+    }
+    
+    if (showDeleted) {
+        $.ajax({
+            method: "GET",
+            url: "/api/locations/deleted"
+        }).success(function(deletions) {
+            var n = locations.length;
+            locations = locations.concat(deletions);
+            for (var i = 0; i < deletions.length; i++) {
+                var marker = L.marker([deletions[i].lat, deletions[i].lng], {icon: red}).addTo(map);
+                locations[n + i].marker = marker;
+                bindDeletedMarkerHTML(locations[n + i]);
+            }
+        });
     }
 
     var t = null;
@@ -150,7 +177,15 @@ function bindMarkerHTML(data){
     data.marker.bindPopup(html);
 }
 
-function editLocation(id){
+function bindDeletedMarkerHTML(data){
+    var html = "";
+    html += "<div class=\"marker-image\" data-image=\"" + data.img + "\" style=\"background-image: url(" + data.img + ")\"></div>"; 
+    html += "<p><strong>" + data.desc + "</strong></p>";
+    html += "<p><button onclick=\"javascript:editLocation('" + data.uuid + "', true);\" class=\"btn btn-default btn-block btn-sm\"><i class=\"glyphicon glyphicon-pencil\"><!-- pencil --></i> Edit this location</button></p>"
+    data.marker.bindPopup(html);
+}
+
+function editLocation(id, isDeleted){
     for (var i = 0; i < locations.length; i++) {
        if (locations[i].uuid == id) {
             var data = {
@@ -162,14 +197,15 @@ function editLocation(id){
                 notes: locations[i].notes
             }
             initModal("Edit location", data);
-            initUpdateModalButtons(locations[i]);
+            initUpdateModalButtons(locations[i], isDeleted);
             break;
        }
     }
 }
 
-function initUpdateModalButtons(location){
-    $("#edit-modal .modal-footer .btn-danger").show();
+function initUpdateModalButtons(location, isDeleted){
+    if (isDeleted) $("#edit-modal .modal-footer .btn-danger").hide();
+    else $("#edit-modal .modal-footer .btn-danger").show();
     $("#edit-modal .modal-footer .btn-danger").bind("click.update", function(){
         if (!checkRecaptcha()) return;
         $("#delete-confirm-modal").modal("show");
@@ -181,6 +217,11 @@ function initUpdateModalButtons(location){
                 data: {uuid: location.uuid}
             }).done(function() {
                 map.removeLayer(location.marker);
+                if (showDeleted) {
+                    var marker = L.marker([location.lat, location.lng], {icon: red}).addTo(map);
+                    location.marker = marker;
+                    bindDeletedMarkerHTML(location);
+                }
                 $("#edit-modal").modal("hide");
             });
         });
@@ -208,6 +249,11 @@ function initUpdateModalButtons(location){
                 url: "/api/location",
                 data: data
             }).done(function() {
+                if (isDeleted) {
+                    map.removeLayer(location.marker);
+                    var marker = L.marker([location.lat, location.lng]).addTo(map);
+                    location.marker = marker;
+                }
                 bindMarkerHTML(location);
                 $("#edit-modal").removeClass("avoid-clicks");
                 $("#edit-modal").modal("hide");
@@ -254,4 +300,17 @@ function getBase64Image(cb){
     } catch (err) {
         cb("");
     }
+}
+
+// http://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript
+function getParameterByName(name, url) {
+    if (!url) {
+      url = window.location.href;
+    }
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
