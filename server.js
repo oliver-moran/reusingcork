@@ -7,8 +7,10 @@ var Jimp = require("jimp");
 var FS = require("fs");
 var Path = path = require("path");
 var DataUriToBuffer = require("data-uri-to-buffer");
+var Zip = require("express-zip");
+var Glob = require("glob")
 
-var data_dir = process.env.OPENSHIFT_DATA_DIR || "./";
+var data_dir = process.env.OPENSHIFT_DATA_DIR || Path.join(__dirname, "./");
 var static_dir = Path.join(data_dir, "static");
 var db_dir = Path.join(data_dir, "db");
 
@@ -40,7 +42,7 @@ app.get("/api/locations", function(req, res) {
             res.json(docs);
         }
     });
-})
+});
 
 app.get("/api/revisions", function(req, res) {
     db.revisions.find({}, function (err, docs) {
@@ -50,7 +52,33 @@ app.get("/api/revisions", function(req, res) {
             res.json(docs);
         }
     });
-})
+});
+
+app.get("/api/export", function(req, res) {
+    Glob(Path.join(db_dir, "*.json"), {realpath: true, nonull: false}, function (err, databases) {
+        if (err) res.status(500)
+        else Glob(Path.join(static_dir, "*.jpg"), {realpath: true, nonull: false}, function (err, images) {
+            if (err) res.status(500)
+            else {
+                var files = [];
+                databases.forEach(function(database){
+                    files.push({
+                        path: database,
+                        name: Path.relative(data_dir, database)
+                    });
+                });
+                images.forEach(function(image){
+                    files.push({
+                        path: image,
+                        name: Path.relative(data_dir, image)
+                    });
+                });
+                console.log(files);
+                res.zip(files, "reusingcork-" + Date.now() + ".zip");
+            }
+        });
+    });
+});
 
 app.post("/api/location", function(req, res) {
     var doc = req.body;

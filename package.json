@@ -4,7 +4,7 @@
   "description": "A website that allows people to list underused and vacant sites in Cork",
   "main": "server.js",
   "scripts": {
-	"start": "node server.js",
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -20,6 +20,8 @@
     "cookie-parser": "^1.4.3",
     "data-uri-to-buffer": "0.0.4",
     "express": "^4.14.0",
+    "express-zip": "^2.0.1",
+    "glob": "^7.1.1",
     "jimp": "^0.2.27",
     "multer": "^1.2.1",
     "nedb": "^1.8.0",
