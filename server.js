@@ -31,7 +31,7 @@ app.use(Express.static("public"));
 app.use("/static", Express.static(static_dir))
 
 app.get("/api/hello/:world", function(req, res){
-  res.send("Hello, " + + req.params.world);
+  res.send("Hello, " + req.params.world);
 });
 
 app.get("/api/locations", function(req, res) {
@@ -54,7 +54,7 @@ app.get("/api/revisions", function(req, res) {
     });
 });
 
-app.get("/api/export", function(req, res) {
+app.get("/api/data/export", function(req, res) {
     Glob(Path.join(db_dir, "*.json"), {realpath: true, nonull: false}, function (err, databases) {
         if (err) res.status(500)
         else Glob(Path.join(static_dir, "*.jpg"), {realpath: true, nonull: false}, function (err, images) {
@@ -132,13 +132,10 @@ app.put("/api/location", function(req, res) {
         doc.img = path;
         db.locations.update({uuid: doc.uuid}, doc, {upsert: true}, function (err) {
             if (err) res.status(500);
-            else db.locations.find({_id: doc._id}, function (err, docs) {
-                if (err) res.status(500);
-                else {
-                    res.json(doc);
-                    saveRevision(doc);
-                }
-            });
+            else {
+                res.json(doc);
+                saveRevision(doc);
+            }
         });
     });
 });
