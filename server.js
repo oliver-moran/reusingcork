@@ -10,7 +10,8 @@ var DataUriToBuffer = require("data-uri-to-buffer");
 var Zip = require("express-zip");
 var Glob = require("glob");
 
-var data_dir = process.env.OPENSHIFT_DATA_DIR || Path.join(__dirname, "./");
+var data_dir = Path.join(__dirname, "./");
+var public_dir = Path.join(data_dir, "public");
 var static_dir = Path.join(data_dir, "static");
 var db_dir = Path.join(data_dir, "db");
 
@@ -27,7 +28,7 @@ var upload = Multer(); // for parsing multipart/form-data
 app.use(BodyParser.json({limit: "10mb"})); // for parsing application/json
 app.use(BodyParser.urlencoded({limit: "10mb", extended: true })); // for parsing application/x-www-form-urlencoded
 
-app.use(Express.static("public"));
+app.use(Express.static(public_dir));
 app.use("/static", Express.static(static_dir))
 
 app.get("/api/hello/:world", function(req, res){
@@ -159,7 +160,7 @@ function saveImage(img, cb) {
         cb(img); // assume already a path
     }
 }
-    
+
 app.delete("/api/location", function(req, res) {
     var doc = req.body;
     db.locations.remove({uuid: doc.uuid}, {}, function (err) {
@@ -179,11 +180,11 @@ app.delete("/api/location", function(req, res) {
 function saveRevision(doc) {
     db.revisions.insert(doc, function (err, newDoc) {
         if (err) console.error(err);
-    });    
+    });
 }
 
-var ipaddress = process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1";
-var port = process.env.OPENSHIFT_NODEJS_PORT || 8080;
+var ipaddress = "127.0.0.1";
+var port = process.env.PORT || 3000;
 app.listen(port, ipaddress, function() {
     console.log("Listening at http(s)://" + ipaddress + ":" + port);
 });
