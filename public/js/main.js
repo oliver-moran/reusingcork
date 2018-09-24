@@ -26,7 +26,7 @@ $(document).ready(function(){
         startMap();
         initTinyMCE();
     });
-    
+
     if (!window.File || !window.FileReader || !window.FileList || !window.Blob) {
         console.warn("The File APIs are not fully supported in this browser.");
         $("#file-input-group").hide();
@@ -76,8 +76,8 @@ function startMap() {
         L.control.pan({panOffset: 100}).addTo(map);
     }
 
-    L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-        attribution: "&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap</a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>"
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution: "&copy; <a href=\"https://openstreetmap.org\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>"
     }).addTo(map);
 
     for (var i = 0; i < locations.length; i++) {
@@ -85,7 +85,7 @@ function startMap() {
         locations[i].marker = marker;
         bindMarkerHTML(locations[i]);
     }
-    
+
     if (showDeleted) {
         $.ajax({
             method: "GET",
@@ -178,7 +178,7 @@ function initAddModalButtons(marker, lat, lng){
 
 function bindMarkerHTML(data){
     var html = "";
-    html += "<div class=\"marker-image\" data-image=\"" + data.img + "\" style=\"background-image: url(" + data.img + ")\"></div>"; 
+    html += "<div class=\"marker-image\" data-image=\"" + data.img + "\" style=\"background-image: url(" + data.img + ")\"></div>";
     html += "<p><strong>" + data.desc + "</strong></p>";
     html += "<p><button onclick=\"javascript:editLocation('" + data.uuid + "');\" class=\"btn btn-default btn-block btn-sm\"><i class=\"glyphicon glyphicon-pencil\"><!-- pencil --></i> Edit this location</button></p>"
     data.marker.bindPopup(html);
@@ -186,7 +186,7 @@ function bindMarkerHTML(data){
 
 function bindDeletedMarkerHTML(data){
     var html = "";
-    html += "<div class=\"marker-image\" data-image=\"" + data.img + "\" style=\"background-image: url(" + data.img + ")\"></div>"; 
+    html += "<div class=\"marker-image\" data-image=\"" + data.img + "\" style=\"background-image: url(" + data.img + ")\"></div>";
     html += "<p><strong>" + data.desc + "</strong></p>";
     html += "<p><button onclick=\"javascript:editLocation('" + data.uuid + "', true);\" class=\"btn btn-default btn-block btn-sm\"><i class=\"glyphicon glyphicon-pencil\"><!-- pencil --></i> Edit this location</button></p>"
     data.marker.bindPopup(html);
@@ -238,7 +238,7 @@ function initUpdateModalButtons(location, isDeleted){
         if ($("#desc-input").val().trim() == "") return;
         $("#edit-modal .glyphicon-refresh").removeClass("hidden");
         $("#edit-modal").addClass("avoid-clicks");
-        
+
         getBase64Image(function(base64) {
             location.img = base64 || location.img;
             location.desc = $("#desc-input").val().trim();
@@ -326,13 +326,13 @@ function getParameterByName(name, url) {
 function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
   var R = 6371; // Radius of the earth in km
   var dLat = deg2rad(lat2-lat1);  // deg2rad below
-  var dLon = deg2rad(lon2-lon1); 
-  var a = 
+  var dLon = deg2rad(lon2-lon1);
+  var a =
     Math.sin(dLat/2) * Math.sin(dLat/2) +
-    Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
+    Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
     Math.sin(dLon/2) * Math.sin(dLon/2)
-    ; 
-  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+    ;
+  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
   var d = R * c; // Distance in km
   return d;
 }
