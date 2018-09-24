@@ -184,7 +184,7 @@ function saveRevision(doc) {
 }
 
 var ipaddress = "127.0.0.1";
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 5000;
 app.listen(port, ipaddress, function() {
     console.log("Listening at http(s)://" + ipaddress + ":" + port);
 });
