@@ -58,7 +58,11 @@ function resetRecaptcha() {
 function startMap() {
     map = L.map("leaflet-map").setView(CORK_LAT_LNG, 15);
     map.scrollWheelZoom.disable();
-    map.locate({setView: true});
+    map.locate({
+      setView: true,
+      maxZoom: 16,
+      enableHighAccuracy: true
+    });
     map.on('locationfound', function onLocationFound(e) {
         var radius = e.accuracy / 2; // meters
         var km = getDistanceFromLatLonInKm(CORK_LAT_LNG[0],CORK_LAT_LNG[1],e.latlng.lat,e.latlng.lng)
